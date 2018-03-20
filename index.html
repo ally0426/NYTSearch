@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   <title>NYT Search</title>
+   <script
+ src="https://code.jquery.com/jquery-3.3.1.min.js"
+ integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+ crossorigin="anonymous"></script>
+</head>
+<body>
+
+   <div class="jumbotron">
+       <h1>New York Times Search</h1>
+       <p>...</p>
+     </div>
+     <div>
+     <div class="panel panel-default">
+           <div class="panel-body">
+             <h3>Search Parameters</h3>
+           </div>
+             <form>
+                   <div class="form-group">
+                           <label for="searchTerm">Search Term</label>
+                           <input type="text" class="form-control" id="searchTerm">
+                           
+                         </div>
+                         <div class="form-group">
+                               <label for="recordNumber">Number of Records to Retrieve</label>
+                               <select class="form-control" id="exampleFormControlSelect1">
+                                 <option>1</option>
+                                 <option>5</option>
+                                 <option>10</option>
+                               </select>
+                             </div>
+                   <div class="form-group">
+                       <label for="startYear">Start Year (Optional)</label>
+                       <input type="text" class="form-control" id="startYear">
+                       
+                       </div>
+               <div class="form-group">
+                       <label for="endYEar">End Year (Optional)</label>
+                       <input type="text" class="form-control" id="endYear">
+                       
+                       </div>
+
+            </form>
+           
+         </div>
+         </div>
+         <input class="btn btn-primary submit" type="submit" value="Submit">
+         <input class="btn btn-primary reset" type="reset" value="Reset">
+         </form>
+         <div>
+               <div class="panel panel-default results">
+                       <div class="panel-body">
+                         Results
+                       </div>
+                     </div>
+         </div>
+</body>
+</html>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+
+
+
+   
+
+var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + headline + "&begin_date=20100101&end_date20180101&api-key=dd8e67372e13464f8ac2c13b5ad9486a"
+
+var head
+var author;
+var numberofRecords1 = 1;
+var numberOfRecords5 = 5;
+var numberOfRecords10 = 10;
+
+
+$.ajax({
+   url: queryURL,
+   method: "GET"
+ })
+ .then(function(response) {
+
+   for(i = 0; i < response.response.docs.length; i++)  {
+
+       headline = response.response.docs[i].headline.main;
+       author = response.response.docs[i].byline.original;
+
+   }
+
+   $(".submit").on("click", function(){
+       var resultDiv = $("<div>");
+       resultDiv.append(headline);
+       $(".results").append(headline);
+       //resultDiv.text("did this work")
+
+       }
+
+)
+
+ })
+
+
+</script>
